@@ -2,7 +2,7 @@ import EmployeesListItem from "../employees-list-item/employees-list-item";
 
 import './employees-list.css';
 
-const EmployeesList = ({data}) => {
+const EmployeesList = ({data, onDelete}) => {
     
     return (
 
@@ -12,7 +12,8 @@ const EmployeesList = ({data}) => {
                 key={element.id}
                 name={element.name}
                 salary={element.salary} 
-                increase={element.increase} />
+                increase={element.increase}
+                onDelete={() => onDelete(element.id)} />
             })}
         </ul> : <p className="empty-list">Список пуст</p>
 
