@@ -13,7 +13,8 @@ const EmployeesList = ({data, onDelete}) => {
                 name={element.name}
                 salary={element.salary} 
                 increase={element.increase}
-                onDelete={() => onDelete(element.id)} />
+                onDelete={() => onDelete(element.id)}
+                />
             })}
         </ul> : <p className="empty-list">Список пуст</p>
 
