@@ -13,13 +13,13 @@ class App extends Component {
     super(props)
     this.state = {
       data: [
-        {name: 'Mr. Prefetc', salary: 1500, increase: true, id: 1},
-        {name: 'Mr. Bad', salary: 700, increase: false, id: 2},
-        {name: 'Mr. Good', salary: 1500, increase: false, id: 3}
+        {name: 'Mr. Prefetc', salary: 1500, increase: true, rise: true, empty: false, id: 1},
+        {name: 'Mr. Bad', salary: 700, increase: false, rise: false, empty: false, id: 2},
+        {name: 'Mr. Good', salary: 1500, increase: false, rise: false, empty: false, id: 3}
       ]
     }
 
-    this.maxId = 7
+    this.maxId = 4
   }
 
   deleteItem = id => {
@@ -36,11 +36,13 @@ class App extends Component {
     })
   }
 
-  addItem = (name, salary) => {
+  addItem = (name, salary, empty) => {
     const newItem = {
         name, 
         salary,
         increase: false,
+        rise: false,
+        empty,
         id: this.maxId++
     }
     this.setState(({data}) => {
@@ -49,14 +51,51 @@ class App extends Component {
             data: newArr
         }
     });
-}
+  }
+
+  onToggleProp = (id, prop) => {
+    // this.setState(({data}) => {
+    //   const index = data.findIndex(elem => elem.id === id)
+
+    //   const old = data[index]
+    //   const newItem = {...old, increase: !old.increase};
+    //   const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)]
+
+    //   return {
+    //     data: newArr
+    //   }
+    // })
+
+    this.setState(({data}) => ({
+      data: data.map(item => {
+        if (item.id === id) {
+          return {...item, [prop]: !item[prop]}
+        }
+        return item;
+      })
+    }))
+  }
+
+  // onToggleRise = id => {
+  //   this.setState(({data}) => ({
+  //     data: data.map(item => {
+  //       if (item.id === id) {
+  //         return {...item, rise: !item.rise}
+  //       }
+  //       return item;
+  //     })
+  //   }))
+  // }
 
   render() {
+    const employees = this.state.data.length;
+    const increased = this.state.data.filter(item => item.increase).length;
+
     const {data} = this.state
   
     return (
       <div className="app">
-          <AppInfo />
+          <AppInfo employees={employees} increased={increased} />
   
           <div className="search-panel">
               <SearchPanel/>
@@ -65,7 +104,9 @@ class App extends Component {
           
           <EmployeesList 
             data={data}
-            onDelete={this.deleteItem}/>
+            onDelete={this.deleteItem}
+            onToggleProp={this.onToggleProp}
+            />
 
           <EmployeesAddForm onAdd={this.addItem}/>
       </div>

@@ -2,7 +2,7 @@ import EmployeesListItem from "../employees-list-item/employees-list-item";
 
 import './employees-list.css';
 
-const EmployeesList = ({data, onDelete}) => {
+const EmployeesList = ({data, onDelete, onToggleProp}) => {
     
     return (
 
@@ -13,7 +13,10 @@ const EmployeesList = ({data, onDelete}) => {
                 name={element.name}
                 salary={element.salary} 
                 increase={element.increase}
+                rise={element.rise}
                 onDelete={() => onDelete(element.id)}
+                onToggleProp={e => onToggleProp(element.id, e.currentTarget.getAttribute('data-toggle'))}
+                
                 />
             })}
         </ul> : <p className="empty-list">Список пуст</p>
