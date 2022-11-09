@@ -5,7 +5,8 @@ const AppFilter = ({filter, onFilterSelect}) => {
     const buttonsData = [
         {name: 'all', label: 'Все сотрудники'},
         {name: 'rise', label: 'На повышение'},
-        {name: 'moreThen1000', label: 'З/П больше 1000$'}
+        {name: 'moreThen1000', label: 'З/П больше 1000$'},
+        {name: 'increase', label: 'Премия'},
     ]
 
     const buttons = buttonsData.map(({name, label}) => {
@@ -31,3 +32,8 @@ const AppFilter = ({filter, onFilterSelect}) => {
 }
 
 export default AppFilter;
+
+
+
+
+
