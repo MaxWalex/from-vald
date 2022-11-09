@@ -16,7 +16,11 @@ const EmployeesListItem = ({name, salary, onDelete, onToggleProp, increase, rise
 
     return (
         <li className={className}>
-            <span className="list-group-item-label" onClick={onToggleProp} data-toggle="rise">{name}</span>
+            <span 
+            className="list-group-item-label" 
+            onClick={onToggleProp} 
+            data-toggle="rise"
+            >{name}</span>
             <input type="text" className="list-group-item-input" defaultValue={currency + salary}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"
